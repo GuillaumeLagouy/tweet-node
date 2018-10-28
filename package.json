@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "badwords": "^1.0.0",
     "dotenv": "^6.1.0",
     "twitter": "^1.7.1",
     "ws": "^6.1.0"

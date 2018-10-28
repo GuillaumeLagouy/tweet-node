@@ -7,7 +7,8 @@ class SocketStream extends Writable{
     }
 
     _write(chunk, encoding, callback){
-        this.ws.send(chunk.toString());
+        if(this.ws.readyState === this.ws.OPEN)
+            this.ws.send(chunk.toString());
         callback();
     }
 }

@@ -1,4 +1,4 @@
-const TwitterStream = require('./TwitterStream');
+const TwitterStream = require('../../stream/TwitterStream');
 const dotenv = require('dotenv');
 const Twitter = require('twitter');
 

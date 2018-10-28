@@ -1,5 +1,7 @@
 const {Transform} = require('stream');
-const replaceBy = require( './replaceBy' );
+const badwordsArray = require('badwords/array');
+const fs = require('fs');
+
 
 const tweetExtractor = new Transform({
     readableObjectMode: true,
@@ -36,18 +38,45 @@ const counter = new Transform({
     }
 });
 
+//First project
+
 const trumpify = new Transform({
     readableObjectMode: true,
     writableObjectMode: true,
 
     transform(chunk, encoding, callback){
         if(chunk !== undefined) {
+            let jsonfile = fs.readFileSync('public/dictionary.json');
+            var dictionary = JSON.parse(jsonfile.toString());
+
             let new_word = chunk;
-            replaceBy.forEach((value => {
+            dictionary.forEach(value =>{
                 let reg = new RegExp(value.word, "gi");
                 new_word = new_word.replace(reg, value.replace);
-            }));
+            });
             this.push(new_word);
+        }
+        callback();
+    }
+});
+
+//Second Project
+const badwords = new Transform({
+    readableObjectMode: true,
+    writableObjectMode: true,
+
+    transform(chunk, encoding, callback){
+        if(chunk !== undefined){
+            let tweet = chunk.toString();
+            let tweetPonctuationLess = tweet.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+
+            let tweetWords = tweetPonctuationLess.split(' ');
+
+            tweetWords.forEach(value => {
+                if(badwordsArray.indexOf(value) > -1){
+                    this.push(value);
+                }
+            });
         }
         callback();
     }
@@ -58,4 +87,5 @@ module.exports = {
     stringify,
     counter,
     trumpify,
+    badwords,
 };

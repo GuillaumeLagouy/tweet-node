@@ -1,0 +1,44 @@
+body{
+    overflow-y: hidden;
+    margin: 0; padding: 0;
+    display: flex;
+    font-family: sans-serif;
+}
+
+#tweet-container{
+    width: 50%;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 5px;
+}
+
+#tweet-container span{
+    background-color: lightskyblue;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+/*USER TERMINAL_________________________*/
+#user-terminal-container{
+    width: 50%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background-color: black;
+    color: white;
+}
+
+#user-terminal-container input{
+    border: none;
+    background-color: #000D1E;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+#user-terminal-result{
+    margin: 0;
+}
+/*END USER TERMINAL_____________________*/
